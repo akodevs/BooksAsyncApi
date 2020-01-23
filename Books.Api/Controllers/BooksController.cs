@@ -1,4 +1,6 @@
-﻿using Books.Api.Filters;
+﻿using AutoMapper;
+using Books.Api.Filters;
+using Books.Api.Models;
 using Books.Api.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -13,9 +15,12 @@ namespace Books.Api.Controllers
     public class BooksController : ControllerBase
     {
         private IBooksRepository _booksRepository;
-        public BooksController(IBooksRepository booksRepository)
+        private readonly IMapper _mapper;
+
+        public BooksController(IBooksRepository booksRepository, IMapper mapper)
         {
-            _booksRepository = booksRepository ?? throw new ArgumentException(nameof(booksRepository));
+            _booksRepository = booksRepository ?? throw new ArgumentNullException(nameof(booksRepository));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
         [HttpGet]
@@ -29,7 +34,7 @@ namespace Books.Api.Controllers
 
         [HttpGet]
         [BookResultFilter]
-        [Route("{id}")]
+        [Route("{id}", Name = "GetBook")]
         public async Task<IActionResult> GetBook(Guid id)
         {
             var bookEntity = await _booksRepository.GetBookAsync(id);
@@ -38,6 +43,20 @@ namespace Books.Api.Controllers
                 return NotFound();
             }
             return Ok(bookEntity);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateBook([FromBody] BookForCreation book)
+        {
+            var bookEntity = _mapper.Map<Entities.Book>(book);
+            _booksRepository.AddBook(bookEntity);
+
+            // you have to add validaiton here
+            await _booksRepository.SaveChangesAsync();
+
+            return CreatedAtRoute("GetBook", 
+                new  { id = bookEntity.Id },
+                bookEntity);
         }
     }
 }

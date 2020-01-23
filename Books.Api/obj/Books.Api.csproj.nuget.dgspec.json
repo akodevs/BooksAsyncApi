@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\kodiak\\source\\repos\\Books\\Books.Api\\Books.Api.csproj": {}
+    "\\\\Mac\\Home\\Documents\\Development\\dotNet\\BooksAsyncApi\\Books.Api\\Books.Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\kodiak\\source\\repos\\Books\\Books.Api\\Books.Api.csproj": {
+    "\\\\Mac\\Home\\Documents\\Development\\dotNet\\BooksAsyncApi\\Books.Api\\Books.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\kodiak\\source\\repos\\Books\\Books.Api\\Books.Api.csproj",
+        "projectUniqueName": "\\\\Mac\\Home\\Documents\\Development\\dotNet\\BooksAsyncApi\\Books.Api\\Books.Api.csproj",
         "projectName": "Books.Api",
-        "projectPath": "C:\\Users\\kodiak\\source\\repos\\Books\\Books.Api\\Books.Api.csproj",
+        "projectPath": "\\\\Mac\\Home\\Documents\\Development\\dotNet\\BooksAsyncApi\\Books.Api\\Books.Api.csproj",
         "packagesPath": "C:\\Users\\kodiak\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\kodiak\\source\\repos\\Books\\Books.Api\\obj\\",
+        "outputPath": "\\\\Mac\\Home\\Documents\\Development\\dotNet\\BooksAsyncApi\\Books.Api\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
