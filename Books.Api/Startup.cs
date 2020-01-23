@@ -35,9 +35,9 @@ namespace Books.Api
 
             services.AddScoped<IBooksRepository, BooksRepository>();
 
-            // services.AddAutoMapper(typeof(BooksProfile)); 
             services.AddAutoMapper(typeof(Startup));
             services.AddMvc();
+            services.AddHttpClient();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
