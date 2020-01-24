@@ -16,11 +16,13 @@ namespace Books.Api.Services
         Task<IEnumerable<Entities.Book>> GetBooksAsync();
 
         Task<IEnumerable<Entities.Book>> GetBooksAsync(IEnumerable<Guid> bookIds);
-        
+
         // do book cover make sense without book?
         // We are not adding another repo for book cover since our repo is persistent, ignorant
         // and can call to multiple data sources
         Task<BookCover> GetBookCoverAsync(string coverId);
+
+        Task<IEnumerable<BookCover>> GetBookCoversAsync(Guid coverId);
 
         Task<Entities.Book> GetBookAsync(Guid id);
 

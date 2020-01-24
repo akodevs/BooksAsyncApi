@@ -41,7 +41,7 @@ namespace Books.Api.Services
 
         public async Task<IEnumerable<Book>> GetBooksAsync(IEnumerable<Guid> bookIds)
         {
-            return await _context.Books 
+            return await _context.Books
                 .Where(b => bookIds.Contains(b.Id))
                 .Include(b => b.Author)
                 .ToListAsync();
@@ -62,7 +62,36 @@ namespace Books.Api.Services
                     await response.Content.ReadAsStringAsync());
             }
 
-            return null; 
+            return null;
+        }
+
+        public async Task<IEnumerable<BookCover>> GetBookCoversAsync(Guid bookId)
+        {
+            var httpClient = _httpClientFactory.CreateClient();
+            var bookCovers = new List<BookCover>();
+
+            var bookCoverUrls = new[]
+            {
+                $"https://localhost:44308/api/bookcovers/{bookId}-dummycover1",
+                $"https://localhost:44308/api/bookcovers/{bookId}-dummycover2",
+                $"https://localhost:44308/api/bookcovers/{bookId}-dummycover3",
+                $"https://localhost:44308/api/bookcovers/{bookId}-dummycover4",
+                $"https://localhost:44308/api/bookcovers/{bookId}-dummycover5",
+            };
+
+            foreach (var bookCoverUrl in bookCoverUrls)
+            {
+                var response = await httpClient
+                    .GetAsync(bookCoverUrl);
+
+                if(response.IsSuccessStatusCode)
+                {
+                    bookCovers.Add(JsonConvert.DeserializeObject<BookCover>(
+                        await response.Content.ReadAsStringAsync()));
+                }
+            }
+
+            return bookCovers;
         }
 
         public void AddBook(Book bookToAdd)

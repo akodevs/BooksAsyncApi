@@ -33,7 +33,8 @@ namespace Books.Api.Controllers
 
 
         [HttpGet]
-        [BookResultFilter]
+        //[BookResultFilter
+        [BookWithCoversResultFilter]
         [Route("{id}", Name = "GetBook")]
         public async Task<IActionResult> GetBook(Guid id)
         {
@@ -43,8 +44,17 @@ namespace Books.Api.Controllers
                 return NotFound();
             }
 
-            var bookCover = await _booksRepository.GetBookCoverAsync("dummyCover");
-            return Ok(bookEntity);
+            // Get book cover
+            // var bookCover = await _booksRepository.GetBookCoverAsync("dummyCover");
+            // Get book covers
+
+            var bookCovers = await _booksRepository.GetBookCoversAsync(id);
+
+
+            //(Entities.Book book, IEnumerable<ExternalModels.BookCover> bookCovers) propertyBag =
+            //    (bookEntity, bookCovers);
+
+            return Ok((bookEntity, bookCovers));
         }
 
         [HttpPost]

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Books.Api.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,14 @@ namespace Books.Api
                 $"{src.Author.FirstName} {src.Author.LastName}"));
 
             CreateMap<Models.BookForCreation, Entities.Book>();
+
+            CreateMap<Entities.Book, BookWithCovers>()
+                .ForMember(dest => dest.Author, opt => opt.MapFrom(src =>
+                $"{src.Author.FirstName} {src.Author.LastName}"));
+
+            CreateMap<IEnumerable<ExternalModels.BookCover>, BookWithCovers>()
+              .ForMember(dest => dest.BookCovers, opt => opt.MapFrom(src =>
+               src));
         }
     }
 }
